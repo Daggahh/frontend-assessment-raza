@@ -76,36 +76,42 @@ export function SearchFilters() {
   };
 
   return (
-    <div className="mb-8 grid grid-cols-1 gap-3 rounded-2xl border border-slate-700 bg-slate-900/80 p-4 md:grid-cols-[2fr_1fr_1fr]">
-      <label className="flex flex-col gap-2 text-sm font-medium text-slate-100">
-        Search
-        <div className="flex items-center rounded-md border border-slate-700 bg-slate-950 px-3 focus-within:ring-2 focus-within:ring-amber-500/50">
+    <div className="relative z-30 mb-8 grid grid-cols-1 gap-4 rounded-2xl border border-slate-700/50 bg-slate-900/60 p-5 shadow-sm backdrop-blur-md md:grid-cols-[2fr_1fr_1fr] md:gap-5">
+      <div className="flex flex-col gap-2">
+        <label htmlFor="search-input" className="text-sm font-semibold tracking-wide text-slate-300">
+          Search
+        </label>
+        <div className="flex h-11 items-center rounded-lg border border-slate-700 bg-slate-950/80 px-3 transition-colors focus-within:border-amber-500/50 focus-within:ring-1 focus-within:ring-amber-500/50">
           <input
+            id="search-input"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            className="w-full bg-transparent py-2 text-slate-100 outline-none"
+            className="w-full bg-transparent text-sm text-slate-100 placeholder:text-slate-500 outline-none"
             placeholder="Search movies or TV titles..."
           />
           {query ? (
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="ml-2 rounded px-2 py-1 text-xs text-slate-400 transition hover:bg-slate-800 hover:text-white"
+              className="ml-2 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full text-xs text-slate-400 transition hover:bg-slate-800 hover:text-slate-200"
               aria-label="Clear search"
             >
-              X
+              ✕
             </button>
           ) : null}
         </div>
-      </label>
-      <label className="flex flex-col gap-2 text-sm font-medium text-slate-100">
-        Type
-        <div className="grid grid-cols-2 rounded-md border border-slate-700 bg-slate-950 p-1">
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <span className="text-sm font-semibold tracking-wide text-slate-300">Type</span>
+        <div className="grid h-11 grid-cols-2 gap-1 rounded-lg border border-slate-700 bg-slate-950/80 p-1">
           <button
             type="button"
             onClick={() => updateParam("type", "movie")}
-            className={`rounded px-3 py-2 text-sm transition ${
-              initialType === "movie" ? "bg-amber-400 font-semibold text-slate-950" : "text-slate-300 hover:bg-slate-800"
+            className={`flex cursor-pointer items-center justify-center rounded-md text-sm font-medium transition-all duration-200 ${
+              initialType === "movie" 
+                ? "bg-amber-400 text-slate-950 shadow-sm" 
+                : "text-slate-400 hover:bg-slate-800/80 hover:text-slate-200"
             }`}
           >
             Movies
@@ -113,29 +119,34 @@ export function SearchFilters() {
           <button
             type="button"
             onClick={() => updateParam("type", "tv")}
-            className={`rounded px-3 py-2 text-sm transition ${
-              initialType === "tv" ? "bg-amber-400 font-semibold text-slate-950" : "text-slate-300 hover:bg-slate-800"
+            className={`flex cursor-pointer items-center justify-center rounded-md text-sm font-medium transition-all duration-200 ${
+              initialType === "tv" 
+                ? "bg-amber-400 text-slate-950 shadow-sm" 
+                : "text-slate-400 hover:bg-slate-800/80 hover:text-slate-200"
             }`}
           >
             TV Shows
           </button>
         </div>
-      </label>
-      <label className="flex flex-col gap-2 text-sm font-medium text-slate-100">
-        Sort
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <span className="text-sm font-semibold tracking-wide text-slate-300">Sort By</span>
         <div className="relative" ref={sortRef}>
           <button
             type="button"
             onClick={() => setIsSortOpen((prev) => !prev)}
-            className="flex w-full items-center justify-between rounded-md border border-slate-700 bg-slate-950 px-3 py-2 text-left text-slate-100 outline-none ring-amber-500/50 transition hover:border-slate-600 focus:ring-2"
+            className="flex h-11 w-full cursor-pointer items-center justify-between rounded-lg border border-slate-700 bg-slate-950/80 px-4 text-left text-sm font-medium text-slate-200 outline-none transition-colors hover:border-slate-600 focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50"
             aria-haspopup="listbox"
             aria-expanded={isSortOpen}
           >
             <span>{activeSortLabel}</span>
-            <span className={`text-xs text-slate-400 transition ${isSortOpen ? "rotate-180" : ""}`}>v</span>
+            <span className={`text-[10px] text-slate-400 transition-transform duration-200 ${isSortOpen ? "rotate-180" : ""}`}>
+              ▼
+            </span>
           </button>
           {isSortOpen ? (
-            <div className="absolute z-20 mt-2 w-full overflow-hidden rounded-md border border-slate-700 bg-slate-950 shadow-lg shadow-black/40">
+            <div className="absolute z-50 mt-2 w-full overflow-hidden rounded-lg border border-slate-700 bg-slate-950 shadow-xl shadow-black/50">
               <ul role="listbox" className="py-1">
                 {SORT_OPTIONS.map((option) => (
                   <li key={option.value}>
@@ -145,10 +156,10 @@ export function SearchFilters() {
                         setIsSortOpen(false);
                         updateParam("sort", option.value);
                       }}
-                      className={`w-full px-3 py-2 text-left text-sm transition ${
+                      className={`w-full cursor-pointer px-4 py-2.5 text-left text-sm font-medium transition-colors ${
                         option.value === initialSort
-                          ? "bg-amber-400/20 text-amber-300"
-                          : "text-slate-200 hover:bg-slate-800"
+                          ? "bg-amber-400/10 text-amber-400"
+                          : "text-slate-300 hover:bg-slate-800"
                       }`}
                     >
                       {option.label}
@@ -159,7 +170,7 @@ export function SearchFilters() {
             </div>
           ) : null}
         </div>
-      </label>
+      </div>
     </div>
   );
 }
