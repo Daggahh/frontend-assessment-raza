@@ -1,0 +1,13 @@
+{
+  "name": "reelforge",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-04-02",
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": { "enabled": true },
+  "vars": {
+    "TMDB_API_KEY": "set-in-dashboard-or-ci"
+  }
+}
