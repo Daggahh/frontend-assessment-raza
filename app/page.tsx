@@ -84,7 +84,7 @@ export default async function Home({ searchParams }: HomePageProps) {
             REELFORGE
           </p>
           <h1 className="max-w-2xl text-3xl font-extrabold tracking-tight text-white md:text-5xl">{heroTitle}</h1>
-          <p className="mt-4 max-w-2xl text-slate-300">{heroOverview}</p>
+          <p className="mt-4 max-w-2xl text-slate-100">{heroOverview}</p>
         </div>
       </header>
 
