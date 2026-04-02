@@ -4,6 +4,7 @@
 # next.js
 /.next
 /out
+/.open-next
 
 # production
 /build
@@ -14,6 +15,11 @@
 
 # debug
 npm-debug.log*
+pnpm-debug.log*
+
+# cloudflare / wrangler
+.wrangler
+.wrangler/
 
 # local env files
 .env*.local

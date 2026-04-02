@@ -1,0 +1,75 @@
+Cloudflare Workers Deployment Setup (Next.js + OpenNext)
+
+1) Prerequisites
+- Cloudflare account
+- Node.js 20+
+- A TMDB API key from https://developer.themoviedb.org/
+
+2) Install dependencies
+- pnpm install
+- pnpm add -D @opennextjs/cloudflare wrangler
+
+3) Add environment variable
+- Create `.env.local` with:
+  TMDB_API_KEY=your_tmdb_key_here
+
+4) Configure Wrangler
+- Create `wrangler.jsonc` in project root:
+{
+  "name": "reelforge",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-04-02",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": { "enabled": true }
+}
+
+5) Add scripts to package.json
+- "opennext:build": "opennextjs-cloudflare build"
+- "opennext:preview": "opennextjs-cloudflare preview"
+- "cf:deploy": "opennextjs-cloudflare deploy"
+
+6) Authenticate Cloudflare CLI
+- pnpm wrangler login
+
+7) Build and deploy
+- pnpm build
+- pnpm opennext:build
+- pnpm cf:deploy
+
+If deployment fails with "Could not find compiled Open Next config":
+- You skipped the OpenNext build step.
+- Run: `pnpm opennext:build`
+- Then retry: `pnpm cf:deploy`
+
+Windows note
+- OpenNext can be unstable on native Windows.
+- If deployment keeps failing, run this project in WSL (Ubuntu) and deploy from there.
+
+8) Set production secret
+- pnpm wrangler secret put TMDB_API_KEY
+
+Important
+- Do not keep `TMDB_API_KEY` in `vars` inside `wrangler.jsonc`.
+- Use Wrangler secret only, so deploys do not overwrite or conflict.
+
+9) Verify
+- Open deployed URL
+- Confirm home page loads and detail pages render
+- Run Lighthouse and confirm performance/accessibility targets
+
+Notes
+- Keep TMDB_API_KEY out of git.
+- Prefer Cloudflare secrets over plaintext vars for production.
+
+Beginner checklist (Cloudflare dashboard)
+1. Create a Cloudflare account and open Workers & Pages.
+2. Run `pnpm wrangler login` once and approve browser auth.
+3. Deploy once from terminal (`pnpm cf:deploy`).
+4. In Cloudflare dashboard, open your worker `reelforge`.
+5. Go to Settings -> Variables and Secrets, add `TMDB_API_KEY` as Secret.
+6. Redeploy (`pnpm cf:deploy`) so the secret is picked up.
+7. Open your worker URL and confirm list/detail/search/pagination all work.
