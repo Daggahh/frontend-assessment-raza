@@ -1,27 +1,27 @@
-Lighthouse Assessment Summary (Local)
+Lighthouse Assessment Summary (Deployed)
 
 Date: 2026-04-02
 Project: ReelForge
-Environment: Local run
+Environment: Cloudflare Workers (deployed)
 
 Scores
-- Performance: 95
+- Performance: 99
 - Accessibility: 96
 - Best Practices: 100
 - SEO: 100
 
 Core metrics
-- First Contentful Paint (FCP): 0.3 s
-- Largest Contentful Paint (LCP): 1.4 s
+- First Contentful Paint (FCP): 0.4 s
+- Largest Contentful Paint (LCP): 1.0 s
 - Total Blocking Time (TBT): 0 ms
 - Cumulative Layout Shift (CLS): 0
-- Speed Index: 1.1 s
+- Speed Index: 0.7 s
 - INP (local): 0 ms
 
 What this means
 - Performance is in the target range for the assessment.
 - Accessibility passes the bonus threshold (>=95), with one contrast warning noted by Lighthouse.
-- Best Practices and SEO are both excellent in local testing.
+- Best Practices and SEO are both excellent in deployed testing.
 
 Known findings from Lighthouse
 - Contrast: some foreground/background combinations can still be improved.
@@ -31,3 +31,6 @@ Actions already taken
 - Updated contrast in hero/filter areas.
 - Kept explicit image sizing and optimized image loading with `next/image`.
 - Confirmed no layout shift in local run (CLS 0).
+
+Screenshot
+- `public/lighthouse-deployed.png`
