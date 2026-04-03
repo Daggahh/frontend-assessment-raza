@@ -16,6 +16,7 @@
 # debug
 npm-debug.log*
 pnpm-debug.log*
+logs.txt
 
 # cloudflare / wrangler
 .wrangler

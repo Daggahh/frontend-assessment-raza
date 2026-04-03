@@ -10,6 +10,8 @@ import { parsePositiveInt } from "@/lib/utils";
 import type { MediaType, SortBy } from "@/types/tmdb";
 import Image from "next/image";
 
+export const revalidate = 300;
+
 type HomePageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
