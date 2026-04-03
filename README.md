@@ -69,19 +69,19 @@ The latest Lighthouse screenshot is checked in at `public/lighthouse.png`.
 
 ## Bonus Tasks Attempted
 
-### B-1 Cloudflare Workers Edge Caching with OpenNext (+4)
+### B-1 Cloudflare Workers Edge Caching with OpenNext
 
 - OpenNext adapter integrated into scripts and deployment flow.
 - Fetch-level revalidation strategy documented in `lib/api.ts` (`120`, `300`, `1800`).
 - Verification: deploy, then inspect response headers on repeated listing requests.
 - Current status: partial until `x-cache-status` is confirmed on live listing responses.
 
-### B-2 React 18 Streaming with Suspense (+3)
+### B-2 React 18 Streaming with Suspense
 
 - Implemented on listing route with Suspense fallback skeletons in `app/page.tsx`.
 - Verification: throttle network in DevTools and confirm fallback appears before results.
 
-### B-3 Accessibility Audit (+3)
+### B-3 Accessibility Audit
 
 - Lighthouse accessibility score recorded at >=95 in `assesment.txt`.
 - Contrast updates applied after audit feedback.
@@ -90,7 +90,7 @@ The latest Lighthouse screenshot is checked in at `public/lighthouse.png`.
 ## Process and Assessment Notes
 
 - If deployment/runtime issues block anything, I’ll call it out here instead of quietly removing a feature.
-- I’m keeping commits small and readable so it’s easy to review.
+- Keeping commits small and readable so it’s easy to review.
 
 ## Verify
 
